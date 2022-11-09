@@ -1,7 +1,18 @@
 <template>
   <section class="flex flex-wrap gap-2 px-4">
     <div
-      class="bg-neutral-100 w-[18rem] py-2 rounded"
+      :class="
+        char.types[0].type.name === `grass`
+          ? `bg-green-300`
+          : char.types[0].type.name === `fire`
+          ? `bg-red-300`
+          : char.types[0].type.name === `water`
+          ? `bg-blue-300`
+          : char.types[0].type.name === `bug`
+          ? `bg-teal-300`
+          : `bg-neutral-100`
+      "
+      class="w-[18rem] py-2 rounded"
       v-for="char in allPokes"
       :key="char.id"
     >
