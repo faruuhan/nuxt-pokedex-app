@@ -1,12 +1,16 @@
 <template>
   <div class="my-4">
     <section class="container flex flex-wrap gap-y-4 px-4">
-      <CardPokes
+      <div
         v-for="char in allPokes"
-        :pokes="char"
+        class="w-1/2 px-2 md:w-4/12 lg:w-3/12"
         :key="char.id"
-        childclass="bg-white w-full rounded overflow-auto shadow-lg"
-      />
+      >
+        <CardPokes
+          :pokes="char"
+          childclass="bg-white rounded overflow-auto shadow-lg"
+        />
+      </div>
     </section>
 
     <section class="container flex justify-center mt-4">
