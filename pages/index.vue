@@ -1,35 +1,11 @@
 <template>
   <section class="flex flex-wrap gap-2 px-4">
-    <div
-      :class="
-        char.types[0].type.name === `grass`
-          ? `bg-green-300`
-          : char.types[0].type.name === `fire`
-          ? `bg-red-300`
-          : char.types[0].type.name === `water`
-          ? `bg-blue-300`
-          : char.types[0].type.name === `bug`
-          ? `bg-teal-300`
-          : `bg-neutral-100`
-      "
-      class="w-[18rem] py-2 rounded"
+    <CardPokes
       v-for="char in allPokes"
+      :pokes="char"
       :key="char.id"
-    >
-      <div class="flex justify-center my-4">
-        <img
-          :src="
-            `https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/` +
-            String(char.id).padStart(3, '0') +
-            `.png`
-          "
-          :alt="char.name"
-          class="w-[100px]"
-        />
-      </div>
-      <h3 class="text-center text-lg font-medium">{{ char.name }}</h3>
-      <p class="text-center mt-2">{{ char.types[0].type.name }}</p>
-    </div>
+      childclass="bg-white w-[18rem] rounded overflow-auto shadow-lg"
+    />
   </section>
 </template>
 
