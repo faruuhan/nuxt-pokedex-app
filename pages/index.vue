@@ -40,7 +40,8 @@ export default {
       allPokes: [],
     };
   },
-  async mounted() {
+
+  async fetch() {
     const pokes = await this.$axios.get(
       "https://pokeapi.co/api/v2/pokemon?limit=20"
     );
@@ -56,5 +57,6 @@ export default {
 
     this.allPokes = dataPokes;
   },
+  fetchOnServer: false,
 };
 </script>
