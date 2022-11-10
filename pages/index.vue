@@ -1,12 +1,20 @@
 <template>
-  <section class="container flex flex-wrap gap-2 px-4">
-    <CardPokes
-      v-for="char in allPokes"
-      :pokes="char"
-      :key="char.id"
-      childclass="bg-white w-[18rem] rounded overflow-auto shadow-lg"
-    />
-  </section>
+  <div>
+    <section class="container flex flex-wrap gap-4 px-4">
+      <CardPokes
+        v-for="char in allPokes"
+        :pokes="char"
+        :key="char.id"
+        childclass="bg-white w-[18rem] rounded overflow-auto shadow-lg"
+      />
+    </section>
+
+    <section class="container flex justify-center mt-4">
+      <button class="p-3 bg-neutral-200" @click="handleLoadMore">
+        Load more
+      </button>
+    </section>
+  </div>
 </template>
 
 <script>
@@ -14,6 +22,7 @@ export default {
   data() {
     return {
       allPokes: [],
+      loadMore: "",
     };
   },
 
@@ -32,7 +41,26 @@ export default {
     });
 
     this.allPokes = dataPokes;
+    this.loadMore = data.next;
   },
   fetchOnServer: false,
+
+  methods: {
+    async handleLoadMore() {
+      const pokes = await this.$axios.get(this.loadMore);
+
+      const { data } = pokes;
+      const dataPokes = [...this.allPokes];
+      await data.results.map(async (pokemon) => {
+        const pokes = await this.$axios.get(
+          `https://pokeapi.co/api/v2/pokemon/${pokemon.name}`
+        );
+        dataPokes.push(pokes.data);
+      });
+
+      this.allPokes = dataPokes;
+      this.loadMore = data.next;
+    },
+  },
 };
 </script>
