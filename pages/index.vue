@@ -1,5 +1,5 @@
 <template>
-  <section class="flex flex-wrap gap-2 px-4">
+  <section class="container flex flex-wrap gap-2 px-4">
     <CardPokes
       v-for="char in allPokes"
       :pokes="char"
