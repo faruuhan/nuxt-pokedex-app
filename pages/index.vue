@@ -1,20 +1,13 @@
 <template>
   <div class="my-4">
-    <section class="container flex flex-wrap gap-y-4 px-4">
-      <div
-        v-for="char in allPokes"
-        class="w-1/2 px-2 md:w-4/12 lg:w-3/12"
-        :key="char.id"
-      >
-        <CardPokes
-          :pokes="char"
-          childclass="bg-white rounded overflow-auto shadow-lg"
-        />
+    <section class="container row">
+      <div v-for="char in allPokes" class="row__card" :key="char.id">
+        <CardPokes :pokes="char" />
       </div>
     </section>
 
     <section class="container flex justify-center mt-4">
-      <button class="p-3 bg-neutral-200 rounded-lg" @click="handleLoadMore">
+      <button class="button button--secondary" @click="handleLoadMore">
         Load more
       </button>
     </section>
@@ -73,3 +66,19 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.row {
+  @apply flex flex-wrap gap-y-4 px-4;
+  &__card {
+    @apply w-1/2 px-2 md:w-4/12 lg:w-3/12;
+  }
+}
+
+.button {
+  @apply p-3 rounded-lg;
+  &--secondary {
+    @apply bg-neutral-200;
+  }
+}
+</style>

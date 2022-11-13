@@ -1,44 +1,44 @@
 <template>
-  <div :class="childclass">
+  <div class="card">
     <div
       :class="
         pokes.types[0].type.name === `grass`
-          ? `bg-green-300`
+          ? `card__header--grass`
           : pokes.types[0].type.name === `fire`
-          ? `bg-orange-300`
+          ? `card__header--fire`
           : pokes.types[0].type.name === `water`
-          ? `bg-blue-500`
+          ? `card__header--water`
           : pokes.types[0].type.name === `bug`
-          ? `bg-[#999917]`
+          ? `card__header--bug`
           : pokes.types[0].type.name === `fighting`
-          ? `bg-red-300`
+          ? `card__header--fighting`
           : pokes.types[0].type.name === `poison`
-          ? `bg-purple-500`
+          ? `card__header--poison`
           : pokes.types[0].type.name === `flying`
-          ? `bg-violet-400`
+          ? `card__header--flying`
           : pokes.types[0].type.name === `ground`
-          ? `bg-[#acbe06]`
+          ? `card__header--ground`
           : pokes.types[0].type.name === `rock`
-          ? `bg-[#818300]`
+          ? `card__header--rock`
           : pokes.types[0].type.name === `ghost`
-          ? `bg-violet-700`
+          ? `card__header--ghost`
           : pokes.types[0].type.name === `steel`
-          ? `bg-neutral-500`
+          ? `card__header--steel`
           : pokes.types[0].type.name === `electric`
-          ? `bg-yellow-300`
+          ? `card__header--electric`
           : pokes.types[0].type.name === `psychic`
-          ? `bg-pink-500`
+          ? `card__header--psychic`
           : pokes.types[0].type.name === `ice`
-          ? `bg-blue-300`
+          ? `card__header--ice`
           : pokes.types[0].type.name === `dragon`
-          ? `bg-purple-800`
+          ? `card__header--dragon`
           : pokes.types[0].type.name === `dark`
-          ? `bg-[#4b4333]`
+          ? `card__header--dark`
           : pokes.types[0].type.name === `fairy`
-          ? `bg-pink-300`
-          : `bg-[#D9D2C4]`
+          ? `card__header--fairy`
+          : `card__header--normal`
       "
-      class="flex justify-center relative py-5"
+      class="card__header"
     >
       <div class="bg-white/40 w-24 h-24 rounded-full absolute"></div>
       <img
@@ -51,51 +51,50 @@
         class="w-[100px] z-10"
       />
     </div>
-    <h3 class="text-center text-xl font-medium mt-2">
+    <h3 class="card__title">
       {{ pokes.name[0].toUpperCase() + pokes.name.slice(1) }}
     </h3>
-    <!-- <p class="text-center my-2">{{ pokes.types[0].type.name }}</p> -->
-    <ul class="text-center my-2 ul-style">
+    <ul class="card__types">
       <li
         v-for="pokeType in typesPoke"
         :key="pokeType.name"
-        class="font-medium uppercase text-sm"
+        class="card__types__items"
         :class="
           pokeType.name === `grass`
-            ? `text-green-300`
+            ? `card__types__items--grass`
             : pokeType.name === `fire`
-            ? `text-orange-300`
+            ? `card__types__items--fire`
             : pokeType.name === `water`
-            ? `text-blue-500`
+            ? `card__types__items--water`
             : pokeType.name === `bug`
-            ? `text-[#999917]`
+            ? `card__types__items--bug`
             : pokeType.name === `fighting`
-            ? `text-red-300`
+            ? `card__types__items--fighting`
             : pokeType.name === `poison`
-            ? `text-purple-500`
+            ? `card__types__items--poison`
             : pokeType.name === `flying`
-            ? `text-violet-400`
+            ? `card__types__items--flying`
             : pokeType.name === `ground`
-            ? `text-[#acbe06]`
+            ? `card__types__items--ground`
             : pokeType.name === `rock`
-            ? `text-[#818300]`
+            ? `card__types__items--rock`
             : pokeType.name === `ghost`
-            ? `text-violet-700`
+            ? `card__types__items--ghost`
             : pokeType.name === `steel`
-            ? `text-neutral-500`
+            ? `card__types__items--steel`
             : pokeType.name === `electric`
-            ? `text-yellow-300`
+            ? `card__types__items--electric`
             : pokeType.name === `psychic`
-            ? `text-pink-500`
+            ? `card__types__items--psychic`
             : pokeType.name === `ice`
-            ? `text-blue-300`
+            ? `card__types__items--ice`
             : pokeType.name === `dragon`
-            ? `text-purple-800`
+            ? `card__types__items--dragon`
             : pokeType.name === `dark`
-            ? `text-[#4b4333]`
+            ? `card__types__items--dark`
             : pokeType.name === `fairy`
-            ? `text-pink-300`
-            : `text-[#D9D2C4]`
+            ? `card__types__items--fairy`
+            : `card__types__items--normal`
         "
       >
         {{ pokeType.name }}
@@ -106,7 +105,7 @@
 
 <script>
 export default {
-  props: ["pokes", "childclass"],
+  props: ["pokes"],
   computed: {
     typesPoke() {
       return this.pokes.types.map(({ type }) => {
@@ -117,8 +116,131 @@ export default {
 };
 </script>
 
-<style>
-.ul-style li {
-  @apply inline;
+<style lang="scss" scoped>
+.card {
+  @apply bg-white rounded overflow-auto shadow-lg;
+  &__header {
+    @apply flex justify-center relative py-5;
+    &--grass {
+      @apply bg-green-300;
+    }
+    &--fire {
+      @apply bg-orange-300;
+    }
+    &--water {
+      @apply bg-blue-500;
+    }
+    &--bug {
+      @apply bg-[#999917];
+    }
+    &--fighting {
+      @apply bg-red-300;
+    }
+    &--poison {
+      @apply bg-purple-500;
+    }
+    &--flying {
+      @apply bg-violet-400;
+    }
+    &--ground {
+      @apply bg-[#acbe06];
+    }
+    &--rock {
+      @apply bg-[#818300];
+    }
+    &--ghost {
+      @apply bg-violet-700;
+    }
+    &--steel {
+      @apply bg-neutral-500;
+    }
+    &--electric {
+      @apply bg-yellow-300;
+    }
+    &--psychic {
+      @apply bg-pink-500;
+    }
+    &--ice {
+      @apply bg-blue-300;
+    }
+    &--dragon {
+      @apply bg-purple-800;
+    }
+    &--dark {
+      @apply bg-[#4b4333];
+    }
+    &--fairy {
+      @apply bg-pink-300;
+    }
+    &--normal {
+      @apply bg-[#D9D2C4];
+    }
+  }
+  &__title {
+    @apply text-center text-xl font-medium mt-2;
+  }
+  &__types {
+    @apply text-center my-2;
+    li {
+      @apply inline;
+    }
+    &__items {
+      @apply font-medium uppercase text-sm;
+      &--grass {
+        @apply text-green-300;
+      }
+      &--fire {
+        @apply text-orange-300;
+      }
+      &--water {
+        @apply text-blue-500;
+      }
+      &--bug {
+        @apply text-[#999917];
+      }
+      &--fighting {
+        @apply text-red-300;
+      }
+      &--poison {
+        @apply text-purple-500;
+      }
+      &--flying {
+        @apply text-violet-400;
+      }
+      &--ground {
+        @apply text-[#acbe06];
+      }
+      &--rock {
+        @apply text-[#818300];
+      }
+      &--ghost {
+        @apply text-violet-700;
+      }
+      &--steel {
+        @apply text-neutral-500;
+      }
+      &--electric {
+        @apply text-yellow-300;
+      }
+      &--psychic {
+        @apply text-pink-500;
+      }
+      &--ice {
+        @apply text-blue-300;
+      }
+      &--dragon {
+        @apply text-purple-800;
+      }
+      &--dark {
+        @apply text-[#4b4333];
+      }
+      &--fairy {
+        @apply text-pink-300;
+      }
+      &--normal {
+        @apply text-[#D9D2C4];
+      }
+    }
+  }
 }
 </style>
