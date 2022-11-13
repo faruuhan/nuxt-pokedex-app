@@ -1,17 +1,11 @@
-<template>
-  <div class="my-4">
-    <section class="container row">
-      <div v-for="char in allPokes" class="row__card" :key="char.id">
-        <CardPokes :pokes="char" />
-      </div>
-    </section>
+<template lang="pug">
+  .my-4
+    .container.row
+      .row__card(v-for="char in allPokes" :key="char.id")
+        CardPokes(:pokes='char')
 
-    <section class="container flex justify-center mt-4">
-      <button class="button button--secondary" @click="handleLoadMore">
-        Load more
-      </button>
-    </section>
-  </div>
+    .container.flex.justify-center.mt-4
+      button.button.button--secondary(@click="handleLoadMore") Load More
 </template>
 
 <script>
