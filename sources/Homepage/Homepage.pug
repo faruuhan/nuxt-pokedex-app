@@ -1,0 +1,7 @@
+.my-4
+  .container.row
+    .row__card(v-for="char in allPokes" :key="char.id")
+      CardPokes(:pokes='char')
+
+  .container.flex.justify-center.mt-4
+    button.button.button--secondary(@click="handleLoadMore") Load More
