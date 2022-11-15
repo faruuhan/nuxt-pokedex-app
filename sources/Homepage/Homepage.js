@@ -10,47 +10,21 @@ export default {
       title: "Nuxt PokeDex",
     };
   },
-  data() {
-    return {
-      allPokes: [],
-      loadMore: "",
-    };
-  },
 
   async fetch() {
-    const pokes = await this.$axios.get(
-      "https://pokeapi.co/api/v2/pokemon?limit=20"
-    );
-
-    const { data } = pokes;
-    const dataPokes = [];
-    await data.results.map(async (pokemon) => {
-      const pokes = await this.$axios.get(
-        `https://pokeapi.co/api/v2/pokemon/${pokemon.name}`
-      );
-      dataPokes.push(pokes.data);
-    });
-
-    this.allPokes = dataPokes;
-    this.loadMore = data.next;
+    await this.$store.dispatch("Pokes/fetchData");
   },
   fetchOnServer: false,
 
   methods: {
     async handleLoadMore() {
-      const pokes = await this.$axios.get(this.loadMore);
+      await this.$store.dispatch("Pokes/handleLoadMore");
+    },
+  },
 
-      const { data } = pokes;
-      const dataPokes = [...this.allPokes];
-      await data.results.map(async (pokemon) => {
-        const pokes = await this.$axios.get(
-          `https://pokeapi.co/api/v2/pokemon/${pokemon.name}`
-        );
-        dataPokes.push(pokes.data);
-      });
-
-      this.allPokes = dataPokes;
-      this.loadMore = data.next;
+  computed: {
+    allPokes() {
+      return this.$store.getters["Pokes/getPokes"];
     },
   },
 };
