@@ -1,12 +1,12 @@
 .card
   .card__header(:class="classBackground(pokes.types[0].type.name)")
-    .card__header__backgroundImg
-    img.card__header__image(
+    .header--backgroundImg
+    img.header--image(
       :src="`https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/${String(pokes.id).padStart(3, '0')}.png`"
     )
   .card__title {{ pokes.name[0].toUpperCase() + pokes.name.slice(1) }}
   ul.card__types
-    li.card__types__items(
+    li.types--items(
       v-for="pokeType in typesPoke",
       :key="pokeType.name",
       :class="classTypes(pokeType.name)"

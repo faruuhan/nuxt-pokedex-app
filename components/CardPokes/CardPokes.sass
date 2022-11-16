@@ -2,9 +2,9 @@
   @apply bg-white rounded overflow-hidden shadow-lg
   &__header
     @apply flex justify-center relative py-5
-    &__backgroundImg
+    .header--backgroundImg
       @apply bg-white/40 w-24 h-24 rounded-full absolute
-    &__image
+    .header--image
       @apply w-[100px] z-10
     &.header--grass
       @apply bg-green-300
@@ -46,7 +46,7 @@
     @apply text-center text-xl font-medium mt-2
   &__types
     @apply my-2 flex gap-2 justify-center
-    &__items
+    .types--items
       @apply font-medium uppercase text-sm
       &.items--grass
         @apply text-green-300
