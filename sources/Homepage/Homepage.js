@@ -1,4 +1,5 @@
 import CardPokes from "~/components/CardPokes/";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   components: {
@@ -12,19 +13,24 @@ export default {
   },
 
   async fetch() {
-    await this.$store.dispatch("Pokes/fetchData");
+    await this.fetchData();
   },
   fetchOnServer: false,
 
   methods: {
+    ...mapActions({
+      loadMore: "Pokes/handleLoadMore",
+      fetchData: "Pokes/fetchData",
+    }),
     async handleLoadMore() {
-      await this.$store.dispatch("Pokes/handleLoadMore");
+      await this.loadMore();
     },
   },
 
   computed: {
+    ...mapGetters("Pokes", ["getPokes"]),
     allPokes() {
-      return this.$store.getters["Pokes/getPokes"];
+      return this.getPokes;
     },
   },
 };
