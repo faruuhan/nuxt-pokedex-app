@@ -53,4 +53,6 @@ export default {
       },
     },
   },
+
+  target: "static",
 };
